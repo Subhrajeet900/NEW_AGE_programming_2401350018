@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"lab2/mathutil"
 )
-
 func main() {
-	fmt.Println("math utilities:")
+	fmt.Println("string utilities")
 	str := "subhrajeet dash"
 	fmt.Printf("Original string: %s\n", str)
 	fmt.Printf("Reversed string: %s\n", mathutil.Reverse(str))
