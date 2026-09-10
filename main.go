@@ -7,7 +7,7 @@ import (
 
 func main() {
 	fmt.Println("math utilities:")
-	str := "Hello World"
+	str := "subhrajeet dash"
 	fmt.Printf("Original string: %s\n", str)
 	fmt.Printf("Reversed string: %s\n", mathutil.Reverse(str))
 	fmt.Printf("Vowel count: %d\n\n", mathutil.CountVowels(str))

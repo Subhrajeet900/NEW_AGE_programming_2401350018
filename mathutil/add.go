@@ -2,7 +2,6 @@ package mathutil
 
 import "strings"
 
-// String manipulation functions
 
 func Reverse(s string) string {
 	runes := []rune(s)
@@ -23,7 +22,6 @@ func CountVowels(s string) int {
 	return count
 }
 
-// Mathematical utility functions
 
 func Factorial(n int) int {
 	if n <= 1 {
