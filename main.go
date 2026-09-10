@@ -6,20 +6,15 @@ import (
 )
 
 func main() {
-	var a int 
-	var b int 
-	fmt.Print("enter the value of a : ")
-	fmt.Scan(&a)
-	fmt.Print("enter the value of b : ")
-	fmt.Scan(&b)
- 
-	fmt.Printf("sum is : %d\n", mathutil.Add(a, b))
-}
+	fmt.Println("math utilities:")
+	str := "Hello World"
+	fmt.Printf("Original string: %s\n", str)
+	fmt.Printf("Reversed string: %s\n", mathutil.Reverse(str))
+	fmt.Printf("Vowel count: %d\n\n", mathutil.CountVowels(str))
 
-func PrintStr(s string){
-	fmt.Println(s)
-	fmt.Println("")
-
-
-
+	fmt.Println("math utilities:")
+	num := 5
+	base, exp := 2, 3
+	fmt.Printf("Factorial of %d is: %d\n", num, mathutil.Factorial(num))
+	fmt.Printf("%d to the power of %d is: %d\n", base, exp, mathutil.Power(base, exp))
 }
