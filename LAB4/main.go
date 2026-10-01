@@ -18,7 +18,7 @@ func (p *Person) ReadData() {
 	fmt.Print("Enter Age: ")
 	fmt.Scanln(&p.Age)
 
-	fmt.Print("Enter Job (single word): ")
+	fmt.Print("Enter Job (single word): ")6
 	fmt.Scanln(&p.Job)
 
 	fmt.Print("Enter Salary: ")
@@ -37,10 +37,10 @@ func main() {
 	var person1 Person
 	var person2 Person
 
-	fmt.Println(" Enter details for Person 1 ")
+	fmt.Println("details for Person 1 ")
 	person1.ReadData()
 
-	fmt.Println("\n Enter details for Person 2 ")
+	fmt.Println("\ndetails for Person 2 ")
 	person2.ReadData()
 
 	fmt.Println("    Displaying Person Details     ")
