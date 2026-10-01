@@ -11,6 +11,14 @@ func updateValue(numPtr *int) {
 	*numPtr = 100
 }
 
+func (s *Student) ReadData() {
+	fmt.Print("Enter Name (single word): ")
+	fmt.Scanln(&s.Name)
+
+	fmt.Print("Enter Age: ")
+	fmt.Scanln(&s.Age)
+}
+
 func main() {
 	var num int = 42
 	fmt.Println("Address:", &num)
@@ -24,8 +32,8 @@ func main() {
 	fmt.Println("After:", val)
 
 	student := new(Student)
-	student.Name = "subhrajeet_dash"
-	student.Age = 21
+
+	student.ReadData()
 
 	fmt.Println("Name:", student.Name)
 	fmt.Println("Age:", student.Age)
