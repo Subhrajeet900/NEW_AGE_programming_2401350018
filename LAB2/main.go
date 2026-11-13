@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func RunCalculator() {
 	var num1, num2 int
 
 	fmt.Println("Simple Integer Calculator")
