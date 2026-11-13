@@ -49,41 +49,45 @@ let studentSummaries =
 
 let mongoUri = "mongodb+srv://subhrajeet1950_db_user:HoQnaZj5wgcbM439@cluster0.tem1fwt.mongodb.net/?compressors=zlib"
 
-let runMongoWorkflow () =
+let runDatabaseAsync () =
     async {
         printfn "Connecting to MongoDB..."
+        do! Async.Sleep(500)
+
         let client = MongoClient(mongoUri)
         let database = client.GetDatabase("CollegeDB")
         let collection = database.GetCollection<Student>("Students")
 
-        do! collection.Database.DropCollectionAsync("Students") |> Async.AwaitTask
+        collection.Database.DropCollection("Students")
 
         printfn "\n--- CREATE ---"
-        do! collection.InsertManyAsync(students) |> Async.AwaitTask
+        collection.InsertMany(students)
         printfn "Inserted student records."
+        do! Async.Sleep(500)
 
         printfn "\n--- READ ---"
-        let! cursor = collection.FindAsync(Builders<Student>.Filter.Empty) |> Async.AwaitTask
-        let! allStudents = cursor.ToListAsync() |> Async.AwaitTask
+        let allStudents = collection.Find(Builders<Student>.Filter.Empty).ToList()
         for s in allStudents do
             let status = gradeToString (evaluateGrade s.Marks)
             printfn "ID: %d | Name: %-10s | Course: %-22s | Marks: %d | Status: %s" s.Id s.Name s.Course s.Marks status
+        do! Async.Sleep(500)
 
         printfn "\n--- UPDATE ---"
         let updateFilter = Builders<Student>.Filter.Eq((fun s -> s.Id), 3)
         let updateDef = Builders<Student>.Update.Set((fun s -> s.Marks), 60)
-        let! _ = collection.UpdateOneAsync(updateFilter, updateDef) |> Async.AwaitTask
+        collection.UpdateOne(updateFilter, updateDef) |> ignore
         printfn "Updated Harsh marks to 60."
+        do! Async.Sleep(500)
 
         printfn "\n--- DELETE ---"
         let deleteFilter = Builders<Student>.Filter.Eq((fun s -> s.Id), 2)
-        let! _ = collection.DeleteOneAsync(deleteFilter) |> Async.AwaitTask
+        collection.DeleteOne(deleteFilter) |> ignore
         printfn "Deleted Deep from database."
+        do! Async.Sleep(500)
 
         printfn "\n--- FINAL STATE ---"
-        let! finalCursor = collection.FindAsync(Builders<Student>.Filter.Empty) |> Async.AwaitTask
-        let! finalList = finalCursor.ToListAsync() |> Async.AwaitTask
-        for s in finalList do
+        let finalStudents = collection.Find(Builders<Student>.Filter.Empty).ToList()
+        for s in finalStudents do
             let status = gradeToString (evaluateGrade s.Marks)
             printfn "ID: %d | Name: %-10s | Course: %-22s | Marks: %d | Status: %s" s.Id s.Name s.Course s.Marks status
     }
@@ -98,4 +102,4 @@ for s in passedStudents do
     printfn "  %s (%d marks)" s.Name s.Marks
 
 printfn "\n=== Database CRUD with Async Workflow ==="
-runMongoWorkflow () |> Async.RunSynchronously
+runDatabaseAsync () |> Async.RunSynchronously
