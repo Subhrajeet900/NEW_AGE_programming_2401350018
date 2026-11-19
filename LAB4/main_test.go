@@ -48,3 +48,4 @@ func TestValidateStudentName(t *testing.T) {
 		t.Errorf("expected error for empty name, got nil")
 	}
 }
+
