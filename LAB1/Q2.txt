@@ -1,0 +1,74 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
+func getIntInput(reader *bufio.Reader, message string) int {
+	for {
+		fmt.Print(message)
+
+		input, _ := reader.ReadString('\n')
+		input = strings.TrimSpace(input)
+
+		num, err := strconv.Atoi(input)
+
+		if err != nil {
+			fmt.Println("Invalid input! Please enter a valid integer.")
+		} else if num < -100000 || num > 100000 {
+			fmt.Println("Out of range! Enter a number between -100000 and 100000.")
+		} else {
+			return num
+		}
+	}
+}
+
+func getFloatInput(reader *bufio.Reader, message string) float64 {
+	for {
+		fmt.Print(message)
+
+		input, _ := reader.ReadString('\n')
+		input = strings.TrimSpace(input)
+
+		num, err := strconv.ParseFloat(input, 64)
+
+		if err != nil {
+			fmt.Println("Invalid input! Please enter a valid number.")
+		} else if num < -100000 || num > 100000 {
+			fmt.Println("Out of range! Enter a number between -100000 and 100000.")
+		} else {
+			return num
+		}
+	}
+}
+
+func main() {
+
+	reader := bufio.NewReader(os.Stdin)
+
+	fmt.Println("===== INTEGER CALCULATIONS =====")
+
+	a := getIntInput(reader, "Enter first integer: ")
+	b := getIntInput(reader, "Enter second integer: ")
+
+	fmt.Println("\nInteger Results:")
+	fmt.Println("Addition:", a+b)
+	fmt.Println("Subtraction:", a-b)
+	fmt.Println("Multiplication:", a*b)
+
+	fmt.Println("\n===== FLOATING-POINT CALCULATIONS =====")
+
+	x := getFloatInput(reader, "Enter first floating-point number: ")
+	y := getFloatInput(reader, "Enter second floating-point number: ")
+
+	fmt.Println("\nFloating-Point Results:")
+	fmt.Println("Addition:", x+y)
+	fmt.Println("Subtraction:", x-y)
+	fmt.Println("Multiplication:", x*y)
+
+	fmt.Println("\nProgram executed successfully!")
+}
