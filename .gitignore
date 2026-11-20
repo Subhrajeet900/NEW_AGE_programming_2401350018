@@ -1,0 +1,6 @@
+.cpcache/
+*.db
+.clj-kondo/
+.lsp/
+
+
